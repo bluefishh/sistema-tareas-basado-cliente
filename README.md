@@ -25,7 +25,7 @@ El app.py se encarga de hacer todas las operaciones sobre la base de datos y tie
 python app.py
 ```
 
-### 3. Abrir el enlace en localhost
+### 2. Abrir el enlace en localhost
 
 Para poder ver la web, se debe primero haber ejecutado el app.py y luego poner esta URL en nuestro navegador preferido:
 
