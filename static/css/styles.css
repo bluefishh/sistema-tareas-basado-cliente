@@ -1,0 +1,43 @@
+.card {
+    width: 30rem;
+}
+
+#btns-actualizar a, button {
+    padding: 0;
+    margin-left: 0.8rem;
+    text-decoration: none;
+    color: black;
+}
+
+.btns-tarea a {
+    text-decoration: none;
+    padding-left: 0.3rem;
+    color: black;
+}
+
+#text-tarea {
+    word-wrap: break-word;
+}
+
+.btn-actualizar {
+    border: none;
+    background-color: white;
+    color: black;
+}
+
+.item-tarea {
+    margin-bottom: 0.2rem;
+    padding: 0.8rem;
+}
+
+/* ATRIBUTION DIV */
+
+.footer-atribucion {
+    font-family: 'Outfit', sans-serif;
+    font-size: 11px;
+    margin-top: 15px;
+    text-align: center;
+}
+.footer-atribucion a {
+    color: hsl(228, 45%, 44%);
+}

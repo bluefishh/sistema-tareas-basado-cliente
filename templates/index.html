@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gestión de Tareas — Ibero - Arquitectura de Software</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}" />
+</head>
+
+<body class="container h-100">
+    <div class="container d-flex justify-content-center align-items-center mt-5">
+        <div class="card text-center">
+            <div class="card-body">
+                <h3 class="card-title mt-2 mb-4">Sistema de Tareas</h3>
+                <!-- Formulario para agregar nueva tarea -->
+                <form action="/crear" method="POST" class="mb-4">
+                    <div class="input-group">
+                        <input type="text" name="descripcion" class="form-control" placeholder="Ingrese una nueva tarea"
+                            required />
+                        <button type="submit" class="btn btn-dark">
+                            Agregar
+                        </button>
+                    </div>
+                </form>
+
+                <hr />
+
+                <!-- Lista de tareas -->
+                <div class="d-flex flex-column">
+                    {% for tarea in tareas %}
+                    <div class="d-flex flex-row justify-content-between align-items-center item-tarea">
+                        <!-- Se muestra el texto de la tarea -->
+                        <div class="text-tarea">{{ tarea[1] }}</div>
+                        <!-- Formulario para actualizar la tarea -->
+                        <form action="/actualizar/{{ tarea[0] }}" method="POST" class="d-none w-100 form-actualizar-tarea">
+                            <div class="input-group">
+                                <textarea type="text" name="nueva_descripcion" class="form-control"></textarea>
+                                <div class="d-flex flex-column justify-content-center align-items-center" id="btns-actualizar">
+                                    <button type="submit" class="btn-actualizar">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor"
+                                            class="bi bi-floppy" viewBox="0 0 16 16">
+                                            <path d="M11 2H9v3h2z" />
+                                            <path
+                                                d="M1.5 0h11.586a1.5 1.5 0 0 1 1.06.44l1.415 1.414A1.5 1.5 0 0 1 16 2.914V14.5a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 14.5v-13A1.5 1.5 0 0 1 1.5 0M1 1.5v13a.5.5 0 0 0 .5.5H2v-4.5A1.5 1.5 0 0 1 3.5 9h9a1.5 1.5 0 0 1 1.5 1.5V15h.5a.5.5 0 0 0 .5-.5V2.914a.5.5 0 0 0-.146-.353l-1.415-1.415A.5.5 0 0 0 13.086 1H13v4.5A1.5 1.5 0 0 1 11.5 7h-7A1.5 1.5 0 0 1 3 5.5V1H1.5a.5.5 0 0 0-.5.5m3 4a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 .5-.5V1H4zM3 15h10v-4.5a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5z" />
+                                        </svg>
+                                    </button>
+                                    <a href="#" class="btn-cancelar-edicion">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                                            class="bi bi-x-lg" viewBox="0 0 16 16">
+                                            <path
+                                                d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z" />
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div>
+                        </form>
+
+                        <!-- Botones de edición y cancelación de edición de la tarea, también el botón de eliminar -->
+                        <div class="btns-tarea">
+                            <a href="#" class="btn-editar">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-pen" viewBox="0 0 16 16">
+                                    <path
+                                        d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001m-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708z" />
+                                </svg>
+                            </a>
+                            <a href="/eliminar/{{ tarea[0] }}">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                                    class="bi bi-trash" viewBox="0 0 20 20">
+                                    <path
+                                        d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z" />
+                                    <path
+                                        d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="d-flex justify-content-center align-items-center footer-atribucion">
+        <span>Codificado por <a href="https://github.com/bluefishh" target="_blank">Edison Cubillos</a></span>
+    </footer>
+    
+    <!-- Scripts que tiene toda la parte de Javascript -->
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
