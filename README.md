@@ -17,7 +17,15 @@ Este proyecto implementa un sistema de gestión de tareas utilizando hecho únic
 
 ## Uso
 
-### 1. Ejecutar el app.py
+### 1. Instalar Flask
+
+El app.py importa el enrutador y todo lo necesario para que se pueda leer desde la web cada acción que se hace sobre las tareas, para instalarlo ejecutamos por consola lo siguiente.
+
+```bash
+pip install Flask
+```
+
+### 2. Ejecutar el app.py
 
 El app.py se encarga de hacer todas las operaciones sobre la base de datos y tiene todas las rutas o endpoints sobre los que se hace cada acción.
 
@@ -25,7 +33,7 @@ El app.py se encarga de hacer todas las operaciones sobre la base de datos y tie
 python app.py
 ```
 
-### 2. Abrir el enlace en localhost
+### 3. Abrir el enlace en localhost
 
 Para poder ver la web, se debe primero haber ejecutado el app.py y luego poner esta URL en nuestro navegador preferido:
 
